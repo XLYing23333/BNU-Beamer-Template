@@ -65,6 +65,8 @@ Create `project/proj1/slide.tex`:
 \begin{document}
 \maketitle
 
+\section{Introduction}
+
 \begin{frame}{Example}
   This is the first slide.
 \end{frame}
@@ -91,6 +93,10 @@ From the repository root, clean intermediate files for a source while keeping PD
 ```bash
 ./.vscode/clean-linux.sh project/proj1/slide.tex
 ```
+
+## Tables and charts
+
+The theme provides the `BNUtable` environment and `\BNUtoprule`, `\BNUmidrule`, and `\BNUbottomrule` for grouped tables with double outer rules. It supports `tabularx`, `\multirow`, and `\cline`. Charts use PGFPlots; the `bnu chart` style supplies theme colors and grid lines. See [demo.tex](template/demo.tex) for a table, single- and multi-series line charts, a line-and-pie layout, and a bar chart. Chart data is specified in the TeX source and rendered as static PDF graphics.
 
 ## Frame scaling
 

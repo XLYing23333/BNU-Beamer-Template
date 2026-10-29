@@ -14,7 +14,7 @@
 ## Creating and building presentations
 
 - From `project/proj*/slide.tex`, load the theme with `\usepackage[bnu, zh]{../../template/collegebeamer}`. A bare `collegebeamer` package name will not find the theme from this directory. Adjust the relative path for deeper directories.
-- Include slide content between `\begin{document}` and `\end{document}`; for example, use `\maketitle` and at least one `frame`. Provide a non-empty subtitle when using the theme title page.
+- Every presentation must define at least one `\section` and organize its content under sections. Use the theme’s automatic section contents pages as shown in `template/demo.tex`; do not add a separate full contents page. Put ordinary content after the first section so automatic subtitles do not show section 0. Provide a non-empty subtitle when using the theme title page.
 - Build Chinese (`zh`) slides with XeLaTeX, from the source directory: `latexmk -xelatex slide.tex`.
 - Build the demo from `template/` with `latexmk -xelatex demo.tex`.
 - Clean a specified source from the repository root with `./.vscode/clean-linux.sh project/proj1/slide.tex`. The script preserves PDF and SyncTeX files.

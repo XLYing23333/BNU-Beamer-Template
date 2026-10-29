@@ -5,6 +5,13 @@
 \RequirePackage{tikz}
 \RequirePackage{listings}
 \RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{makecell}
+\RequirePackage{booktabs}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \RequirePackage{geometry}
 \RequirePackage{amsfonts, amsmath, bm, oldgerm, lmodern}  % math
 \RequirePackage{verbatim}
@@ -289,13 +296,43 @@
 
 \patchcmd{\beamer@frameslide}{\beamer@inframetrue}{\beamer@inframetrue\collegebeamer@applyzoom}{}{\PackageError{collegeBeamer}{Cannot install frame zoom}{}}
 
+% Grouped double-rule table style.
+\newenvironment{BNUtable}[2][\linewidth]{%
+  \begingroup\small
+  \setlength{\tabcolsep}{5pt}%
+  \setlength{\arrayrulewidth}{0.5pt}%
+  \renewcommand{\arraystretch}{1.65}%
+  \setlength{\aboverulesep}{0pt}%
+  \setlength{\belowrulesep}{0pt}%
+  \tabularx{#1}{#2}%
+}{\endtabularx\endgroup}
+\newcommand{\BNUtoprule}{\specialrule{1.5pt}{0pt}{0.7pt}\specialrule{0.5pt}{0pt}{0pt}}
+\newcommand{\BNUmidrule}{\midrule[0.7pt]}
+\newcommand{\BNUbottomrule}{\specialrule{0.5pt}{0pt}{0.7pt}\specialrule{1.5pt}{0pt}{0pt}}
+
+% Reusable PGFPlots styling for charts on ordinary frames.
+\pgfplotscreateplotcyclelist{bnucolors}{%
+  {maincolor,mark=*},
+  {airforceblue,mark=square*},
+  {orange!80!black,mark=triangle*},
+  {teal!70!black,mark=diamond*}
+}
+\pgfplotsset{bnu chart/.style={
+  width=0.88\linewidth,height=0.58\paperheight,
+  axis line style={gray!70},tick style={gray!70},
+  grid=major,grid style={gray!20},
+  tick label style={font=\scriptsize},label style={font=\small},
+  legend style={font=\scriptsize,draw=none,fill=none},
+  cycle list name=bnucolors
+}}
+
 % --- section & frame setting ---
 % subsection
 \newcommand{\strsubsec}{Section \thesection.\thesubsection}
 
 % presents subtitle on each frame
 \makeatletter
-    \pretocmd\beamer@checkframetitle{\framesubtitle{\thesection \, \secname}}
+    \pretocmd\beamer@checkframetitle{\ifnum\value{section}>0\relax\framesubtitle{\thesection \, \secname}\fi}
 \makeatother
 
 % avoid numbering of frames that are breaked into multiply slides

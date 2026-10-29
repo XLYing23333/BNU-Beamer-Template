@@ -63,6 +63,8 @@ mkdir -p project/proj1
 \begin{document}
 \maketitle
 
+\section{介绍}
+
 \begin{frame}{示例页面}
   这是第一张幻灯片。
 \end{frame}
@@ -89,6 +91,10 @@ latexmk -xelatex slide.tex
 ```bash
 ./.vscode/clean-linux.sh project/proj1/slide.tex
 ```
+
+## 表格与图表
+
+主题提供 `BNUtable` 环境和 `\BNUtoprule`、`\BNUmidrule`、`\BNUbottomrule`，用于带分组线的双线表头和表底；支持 `tabularx`、`\multirow` 和 `\cline`。图表使用 PGFPlots，`bnu chart` 样式提供主题配色和网格。完整的表格、单项与多项折线图、折线与饼图组合及柱状图示例见 [demo.tex](template/demo.tex)。图表数据写在 TeX 源文件中，生成的是静态 PDF 图形。
 
 ## 页面缩放
 
